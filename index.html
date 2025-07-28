@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <header>
+    <header id="main-header">
         <div class="logo prompt-thin-italic" style="color: black;">After Wes</div>
         <nav class="nav-bar">
           <ul class="menu-links">
@@ -19,10 +19,10 @@
             <li><a href="#signup" class="prompt-extralight-italic">sign up</a></li>
           </ul>
           <div class="social-icons">
-            <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://tiktok.com" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-            <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="mailto:your@email.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://instagram.com/afterwesmusic" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@afterwesmusic" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.youtube.com/@afterwesmusic" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="mailto:afterwesmusic@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
           </div>
         </nav>
     </header>
@@ -65,6 +65,24 @@
     <section id="music" class="prompt-regular-italic">
         <div class="section-title-wrapper">
         <div class="section-title">music</div>
+        <div class="music-scroll-container">
+          <div class="music-card">
+            <img src="https://image-cdn.later.com/linkinbio_attachments/multi_item_banner_thumbnails/uploads-a8ff953d-d8cc-8fc4-cd95-a504c000ea48/thumb_lg.jpg" alt="give it up">
+            <p class="song-title">give it up</p>
+          </div>
+          <div class="music-card">
+            <img src="your-image-url-2.jpg" alt="bangkok">
+            <p class="song-title">bangkok</p>
+          </div>
+          <div class="music-card">
+            <img src="your-image-url-3.jpg" alt="barcelona">
+            <p class="song-title">barcelona</p>
+          </div>
+          <div class="music-card">
+            <img src="your-image-url-4.jpg" alt="i feel alone">
+            <p class="song-title">i feel alone, and<br>it's cold outside</p>
+          </div>
+        </div>
     </div>
     </section>
 
@@ -104,6 +122,21 @@
                 }
             });
         });
+    </script>
+    <script>
+      function adjustSectionPadding() {
+        const header = document.getElementById('main-header');
+        const headerHeight = header.offsetHeight;
+        const sections = document.querySelectorAll('section');
+
+        sections.forEach(section => {
+          section.style.paddingTop = `${headerHeight + 20}px`; // 20px gap below header
+        });
+      }
+
+      // Run on load and resize
+      window.addEventListener('load', adjustSectionPadding);
+      window.addEventListener('resize', adjustSectionPadding);
     </script>
 </body>
 </html>
