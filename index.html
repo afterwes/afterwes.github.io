@@ -11,43 +11,60 @@
 </head>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('nav a');
-    const header = document.querySelector('header');
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav a");
+    const header = document.querySelector("header");
 
-    function updatePadding() {
+    // Recalculate padding for only the first section
+    function updateTopPadding() {
       const headerHeight = header.offsetHeight;
       sections.forEach((section, index) => {
-        if (index === 0) {
-          section.style.paddingTop = `${headerHeight + 10}px`;
-        } else {
-          section.style.paddingTop = `100px`;
-        }
+        section.style.paddingTop = index === 0 ? `${headerHeight + 20}px` : "100px";
       });
     }
 
-    function updateActiveLink() {
-      let current = '';
+    // Scroll to section with header offset
+    navLinks.forEach(link => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute("href").slice(1);
+        const targetSection = document.getElementById(targetId);
+        const headerHeight = header.offsetHeight;
+
+        // Scroll to correct spot
+        window.scrollTo({
+          top: targetSection.offsetTop - headerHeight + 100,
+          behavior: "smooth"
+        });
+      });
+    });
+
+    // Update active dot based on scroll position
+    function updateActiveDot() {
+      const scrollPos = window.scrollY + header.offsetHeight - 20;
+
       sections.forEach(section => {
-        const sectionTop = section.offsetTop - header.offsetHeight;
-        if (window.scrollY >= sectionTop) {
-          current = section.getAttribute('id');
-        }
-      });
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        const sectionId = section.getAttribute("id");
 
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').includes(current)) {
-          link.classList.add('active');
+        if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+          navLinks.forEach(link => {
+            link.classList.remove("active");
+            if (link.getAttribute("href").includes(sectionId)) {
+              link.classList.add("active");
+            }
+          });
         }
       });
     }
 
-    updatePadding(); // ← run ASAP
-    updateActiveLink(); // ← update nav state too
+    // Initial call and event bindings
+    updateTopPadding();
+    updateActiveDot();
 
-    window.addEventListener('scroll', updateActiveLink);
-    window.addEventListener('resize', updatePadding);
+    window.addEventListener("resize", updateTopPadding);
+    window.addEventListener("scroll", updateActiveDot);
   });
 </script>
 <body>
