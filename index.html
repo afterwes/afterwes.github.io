@@ -43,6 +43,19 @@
     // Update active dot based on scroll position
     function updateActiveDot() {
       const scrollPos = window.scrollY + header.offsetHeight - 20;
+      const atBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 2);
+
+      if (atBottom) {
+        const lastSection = sections[sections.length - 1];
+        const lastId = lastSection.getAttribute("id");
+        navLinks.forEach(link => {
+          link.classList.remove("active");
+          if (link.getAttribute("href").includes(lastId)) {
+            link.classList.add("active");
+          }
+        });
+        return;
+      }
 
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
@@ -87,14 +100,14 @@
         </nav>
     </header>
     <section id="home" class="inter-regular">
-      <div class="news-feed">
+<!--       <div class="news-feed">
         <div class="news-card">
           <h2 class="news-title inter-light">brooklyn show 5/22</h2>
           <a href="https://www.eventbrite.com/e/sights-sounds-shaun-ross-stonie-blue-elkind-more-killen-tickets-1984812097413?utm_campaign=event_page" target="_blank">
             <img src="images/elsewhere_may.jpg" alt="brooklyn show 5/22">
           </a>
         </div>
-      </div>
+      </div> -->
       <div class="news-feed">
         <div class="news-card">
           <h2 class="news-title inter-light">stream SELF CONTROL</h2>
@@ -110,20 +123,13 @@
 <!-- <iframe width="100%" height="315" src="https://www.youtube.com/embed/8i29E2H59aU?si=odI91RXQVrqhrLz9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
           </a>
         </div>
-        <div class="news-card">
-          <h2 class="news-title inter-light">stream once in a lifetime</h2>
-          <a href="https://too.fm/xlamonb" target="_blank">
-            <img src="images/onceinalifetime_artwork.png" alt="once in a lifetime">
-          </a>
-        </div>
-      </div>
     </section>
     <section id="shows" class="michroma-regular">
         <div class="section-title-wrapper">
           <div class="section-title">shows</div>
         </div>
       <div class="shows-list">
-        <div class="show-card">
+<!--         <div class="show-card">
           <div class="show-date">
             <span class="date">MAY 22</span>
             <span class="day">FRI</span>
@@ -135,7 +141,7 @@
             <div class="show-actions">
               <a href="https://www.eventbrite.com/e/sights-sounds-shaun-ross-stonie-blue-elkind-more-killen-tickets-1984812097413?utm_campaign=event_page" target="_blank" rel="noopener" class="ticket-button">TICKETS</a>
             </div>
-        </div>
+        </div> -->
       </div>
     </section>
     <section id="music" class="michroma-regular">
